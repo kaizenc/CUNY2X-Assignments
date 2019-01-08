@@ -14,7 +14,7 @@ class MyComp extends Component {
       <div>
         <ContactCard name="Kaizen" mobile={mobile1} email="test1@test.com"/><br/>
         <ContactCard name="Amy" mobile={mobile2} work = {work1} email="test2@test.com"/><br/>
-        <ContactCard name="Putang" mobile={mobile3} email="test3@test.com"/>
+        <ContactCard name="Miguel" mobile={mobile3} email="test3@test.com"/>
         <Decrement startVal={startval_}/>
       </div>
     );

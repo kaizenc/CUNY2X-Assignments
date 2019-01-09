@@ -7,7 +7,10 @@ class Home extends Component{
     return(
       <div>
         <h1>Bank of React</h1>
-        <Link to="/userProfile">User Profile</Link>
+        <h2><Link to="/login">Login</Link></h2>
+        <Link to="/userProfile">User Profile</Link><br/>
+        <Link to="/credits">Credits</Link><br/>
+        <Link to="/debits">Debits</Link>
         <AccountBalance accountBalance={this.props.accountBalance}/>
       </div>
     );

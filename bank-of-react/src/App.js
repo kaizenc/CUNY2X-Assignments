@@ -3,6 +3,8 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Home from './components/Home';
 import UserProfile from './components/UserProfile'
 import LogIn from './components/Login'
+import Credits from './components/Credits'
+import Debits from './components/Debits'
 import axios from 'axios';
 
 class App extends Component {
@@ -16,6 +18,8 @@ class App extends Component {
       },
       totalCredits: 0,
       totalDebits: 0,
+      Credits: [],
+      Debits: [],
     }
   }
   fetchData(){
@@ -24,14 +28,14 @@ class App extends Component {
       .then(response => {
         var result = response.data.reduce(reducer, 0);
         console.log(result);
-        this.setState({totalCredits:result});
+        this.setState({totalCredits:result, Credits:response.data});
       })
       .catch(err => console.log(err));
     axios.get("https://moj-api.herokuapp.com/debits")
       .then(response => {
         var result = response.data.reduce(reducer, 0);
         console.log(result);
-        this.setState({totalDebits:result});
+        this.setState({totalDebits:result, Debits:response.data});
       })
       .catch(err => console.log(err));
   }
@@ -55,6 +59,8 @@ class App extends Component {
       <UserProfile userName={this.state.currentUser.userName} memberSince={this.state.currentUser.memberSince}/>
     );
     const LogInComponent = () => (<LogIn user={this.state.currentUser} mockLogIn={mockLogIn} {...this.props}/>);
+    const CreditsComponent = () => (<Credits totalCredits={this.state.totalCredits} Credits = {this.state.Credits}/>);
+    const DebitsComponent = () => (<Debits totalDebits={this.state.totalDebits} Debits={this.state.Debits}/>);
 
     //And also using "render" instead of "component"
     return (
@@ -63,6 +69,8 @@ class App extends Component {
           <Route exact path="/" render={HomeComponent}/>
           <Route exact path="/userProfile" render={UserProfileComponent}/>
           <Route exact path="/login" render={LogInComponent}/>
+          <Route exact path="/credits" render={CreditsComponent}/>
+          <Route exact path="/debits" render={DebitsComponent}/>
         </Switch>
       </Router>
     );

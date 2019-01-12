@@ -5,6 +5,10 @@ app.get('/', (req, res) => {
     res.send('<h1>THIS IS THE ROOT!<h1>')
 })
 
+app.get('/hello', function(req, res){
+    res.send('id: ' + req.query.name);
+});
+
 app.get(['/apple', '/ale' ], (req, res) => {
     res.send('<h1>Apple or Ale?<h1>')
 })
